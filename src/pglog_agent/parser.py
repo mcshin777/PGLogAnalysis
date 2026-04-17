@@ -113,7 +113,16 @@ def _append_event(
 
 
 def _parse_identity(identity: str | None) -> tuple[str | None, str | None, str | None]:
-    if not identity or "@" not in identity:
+    if not identity:
+        return None, None, None
+    if identity.startswith("user=") or ",db=" in identity or ",app=" in identity:
+        parts = {}
+        for item in identity.split(","):
+            if "=" in item:
+                key, value = item.split("=", 1)
+                parts[key.strip()] = value.strip()
+        return parts.get("user") or None, parts.get("db") or None, parts.get("app") or None
+    if "@" not in identity:
         return None, None, None
     user, rest = identity.split("@", 1)
     if "/" in rest:

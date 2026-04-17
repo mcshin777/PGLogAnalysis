@@ -6,6 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from pglog_agent.analyzer import analyze_events
 from pglog_agent.parser import parse_file
+from pglog_agent.parser import _parse_identity
 
 
 class ParserTests(unittest.TestCase):
@@ -37,6 +38,9 @@ class ParserTests(unittest.TestCase):
         observations, _, _ = analyze_events(events)
         kinds = {signal.kind for signal in observations[0].plan_signals}
         self.assertIn("high_rows_removed", kinds)
+
+    def test_key_value_identity_is_parsed(self):
+        self.assertEqual(_parse_identity("user=user1,db=mydb,app=worker"), ("user1", "mydb", "worker"))
 
 
 if __name__ == "__main__":
