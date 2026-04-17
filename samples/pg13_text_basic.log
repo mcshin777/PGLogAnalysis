@@ -1,0 +1,17 @@
+2026-04-17 10:15:42.318 KST [28491] app_user@sales_api/order-service LOG:  duration: 3248.512 ms  statement: SELECT o.id, o.total, c.email FROM orders o JOIN customers c ON c.id = o.customer_id WHERE o.created_at >= now() - interval '7 days' ORDER BY o.created_at DESC LIMIT 50;
+2026-04-17 10:15:42.319 KST [28491] app_user@sales_api/order-service LOG:  duration: 1248.512 ms  plan:
+	Query Text: SELECT o.id, o.total, c.email FROM orders o JOIN customers c ON c.id = o.customer_id WHERE o.created_at >= now() - interval '7 days' ORDER BY o.created_at DESC LIMIT 50;
+	Limit  (cost=18432.11..18432.24 rows=50 width=72) (actual rows=50 loops=1)
+	  Buffers: shared hit=8231 read=401
+	  ->  Sort  (cost=18432.11..18601.44 rows=67732 width=72) (actual rows=50 loops=1)
+	        Sort Key: o.created_at DESC
+	        Sort Method: top-N heapsort  Memory: 42kB
+	        Buffers: shared hit=8231 read=401
+	        ->  Hash Join  (cost=421.00..16182.55 rows=67732 width=72) (actual rows=73412 loops=1)
+	              Hash Cond: (o.customer_id = c.id)
+	              Buffers: shared hit=8228 read=401
+	              ->  Seq Scan on orders o  (cost=0.00..14502.00 rows=67732 width=32) (actual rows=73412 loops=1)
+	                    Filter: (created_at >= (now() - '7 days'::interval))
+	                    Rows Removed by Filter: 1920088
+	                    Buffers: shared hit=7810 read=401
+

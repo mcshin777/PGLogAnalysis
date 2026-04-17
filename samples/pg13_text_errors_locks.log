@@ -1,0 +1,4 @@
+2026-04-17 12:02:10.100 KST [28800] app_user@sales_api/order-service LOG:  process 28800 still waiting for ShareLock on transaction 781223 after 1000.123 ms
+2026-04-17 12:02:11.100 KST [28801] app_user@sales_api/order-service ERROR:  deadlock detected
+2026-04-17 12:03:00.200 KST [28802] app_user@sales_api/order-service ERROR:  canceling statement due to statement timeout
+

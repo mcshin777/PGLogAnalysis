@@ -1,0 +1,6 @@
+2026-04-17 10:20:42.318 KST [28500] app_user@sales_api/report-worker LOG:  duration: 4211.001 ms  statement: SELECT date_trunc('day', created_at) AS day, count(*)
+	FROM orders
+	WHERE created_at >= now() - interval '30 days'
+	GROUP BY 1
+	ORDER BY 1;
+

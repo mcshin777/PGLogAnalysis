@@ -1,0 +1,9 @@
+2026-04-17 11:15:42.318 KST [28600] app_user@sales_api/billing-worker LOG:  duration: 5120.300 ms  statement: SELECT * FROM invoices WHERE account_id = 918273 AND status = 'open' ORDER BY due_date;
+2026-04-17 11:15:42.319 KST [28600] app_user@sales_api/billing-worker LOG:  duration: 5120.300 ms  plan:
+	Query Text: SELECT * FROM invoices WHERE account_id = 918273 AND status = 'open' ORDER BY due_date;
+	Sort  (cost=19000.00..19100.00 rows=40000 width=128) (actual rows=88000 loops=1)
+	  Sort Method: external merge  Disk: 20480kB
+	  ->  Seq Scan on invoices  (cost=0.00..14400.00 rows=40000 width=128) (actual rows=88000 loops=1)
+	        Rows Removed by Filter: 810000
+	        Buffers: shared hit=1024 read=4096
+

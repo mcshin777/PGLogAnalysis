@@ -1,0 +1,4 @@
+2026-04-17 13:00:00.000 KST [28900] @/ LOG:  checkpoint starting: time
+2026-04-17 13:00:05.000 KST [28900] @/ LOG:  checkpoint complete: wrote 1200 buffers (7.3%); 0 WAL file(s) added, 0 removed, 1 recycled
+2026-04-17 13:10:05.000 KST [28901] @/ LOG:  temporary file: path "base/pgsql_tmp/pgsql_tmp28901.0", size 33554432
+
